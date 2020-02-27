@@ -107,7 +107,7 @@ InitBuffer:    ldx VRAM_Buffer_Offset,y
 DecTimers:     ldx #$14                  ;load end offset for end of frame timers
                dec IntervalTimerControl  ;decrement interval timer control,
                bpl DecTimersLoop         ;if not expired, only frame timers will decrement
-               lda #$14
+               lda #$11
                sta IntervalTimerControl  ;if control for interval timers expired,
                ldx #$23                  ;interval timers will decrement along with frame timers
 DecTimersLoop: lda Timers,x              ;check current timer
@@ -1337,7 +1337,7 @@ GameTimerData:
 Entrance_GameTimerSetup:
           lda ScreenLeft_PageLoc      ;set current page for area objects
           sta Player_PageLoc          ;as page location for player
-          lda #$28                    ;store value here
+          lda #$70                    ;store value here
           sta VerticalForceDown       ;for fractional movement downwards if necessary
           lda #$01                    ;set high byte of player position and
           sta PlayerFacingDir         ;set facing direction so that player faces right
@@ -2582,6 +2582,7 @@ NextStair: dec StaircaseControl      ;move onto next step (or first if starting)
 Jumpspring:
       jsr GetLrgObjAttrib
       jsr FindEmptyEnemySlot      ;find empty space in enemy object buffer
+      bcs JumpspringEnd
       jsr GetAreaObjXPosition     ;get horizontal coordinate for jumpspring
       sta Enemy_X_Position,x      ;and store
       lda CurrentPageLoc          ;store page location of jumpspring
@@ -2599,6 +2600,7 @@ Jumpspring:
       sta MetatileBuffer,x
       lda #$68
       sta MetatileBuffer+1,x
+JumpspringEnd:
       rts
 
 ;--------------------------------
@@ -2756,7 +2758,6 @@ GetAreaObjYPosition:
 ;-------------------------------------------------------------------------------------
 
 ;unused space
-      .byte $ff, $ff
 
 ;-------------------------------------------------------------------------------------
 
@@ -2982,7 +2983,7 @@ E_GroundArea18:
 
 ;level 8-2
 E_GroundArea19:
-      .byte $29, $8e, $52, $11, $83, $0e, $0f, $03, $9b, $0e
+      .byte $19, $8e, $52, $11, $93, $0e, $0f, $03, $9b, $0e  
       .byte $2b, $8e, $5b, $0e, $cb, $8e, $fb, $0e, $fb, $82
       .byte $9b, $82, $bb, $02, $fe, $42, $e8, $bb, $8e, $0f, $0a
       .byte $ab, $0e, $cb, $0e, $f9, $0e, $88, $86, $a6, $06
@@ -3537,7 +3538,7 @@ L_WaterArea1:
       .byte $0d, $c9, $1e, $01, $6c, $01, $62, $35, $63, $53
       .byte $8a, $41, $ac, $01, $b3, $53, $e9, $51, $26, $c3
       .byte $27, $33, $63, $43, $64, $33, $ba, $60, $c9, $61
-      .byte $ce, $0b, $e5, $09, $ee, $0f, $7d, $ca, $7d, $47
+      .byte $ce, $0b, $de, $0f, $e5, $09, $7d, $ca, $7d, $47
       .byte $fd
 
 ;level 2-2/7-2
@@ -3554,15 +3555,15 @@ L_WaterArea2:
       .byte $c3, $67, $d3, $31, $dc, $06, $f7, $42, $fa, $42
       .byte $23, $b1, $43, $67, $c3, $34, $c7, $34, $d1, $51
       .byte $43, $b3, $47, $33, $9a, $30, $a9, $61, $b8, $62
-      .byte $be, $0b, $d5, $09, $de, $0f, $0d, $ca, $7d, $47
+      .byte $be, $0b, $ce, $0f, $d5, $09, $0d, $ca, $7d, $47
       .byte $fd
 
 ;water area used in level 8-4
 L_WaterArea3:
       .byte $49, $0f
       .byte $1e, $01, $39, $73, $5e, $07, $ae, $0b, $1e, $82
-      .byte $6e, $88, $9e, $02, $0d, $04, $2e, $0b, $45, $09
-      .byte $4e, $0f, $ed, $47
+      .byte $6e, $88, $9e, $02, $0d, $04, $2e, $0b, $3e, $0f
+      .byte $45, $09, $ed, $47    
       .byte $fd
 
 ;-------------------------------------------------------------------------------------
@@ -4288,26 +4289,26 @@ InitCSTimer: sta ClimbSideTimer       ;initialize timer here
 ;$00 - used to store offset to friction data
 
 JumpMForceData:
-      .byte $20, $20, $1e, $28, $28, $0d, $04
+      .byte $30, $30, $2d, $38, $38, $0d, $04
 
 FallMForceData:
-      .byte $70, $70, $60, $90, $90, $0a, $09
+      .byte $a8, $a8, $90, $d0, $d0, $0a, $09
 
 PlayerYSpdData:
-      .byte $fc, $fc, $fc, $fb, $fb, $fe, $ff
+      .byte $fb, $fb, $fb, $fa, $fa, $fe, $ff
 
 InitMForceData:
-      .byte $00, $00, $00, $00, $00, $80, $00
+      .byte $34, $34, $34, $00, $00, $80, $00
 
 MaxLeftXSpdData:
-      .byte $d8, $e8, $f0
+      .byte $d0, $e4, $ed
 
 MaxRightXSpdData:
-      .byte $28, $18, $10
-      .byte $0c ;used for pipe intros
+      .byte $30, $1c, $13
+      .byte $0e
 
 FrictionData:
-      .byte $e4, $98, $d0
+      .byte $c0, $00, $80
 
 Climb_Y_SpeedData:
       .byte $00, $ff, $01
@@ -4371,16 +4372,16 @@ InitJS:
            lda #$01                   ;set player state to jumping/swimming
            sta Player_State
            lda Player_XSpeedAbsolute  ;check value related to walking/running speed
-           cmp #$09
+           cmp #$0a
            bcc ChkWtr                 ;branch if below certain values, increment Y
            iny                        ;for each amount equal or exceeded
-           cmp #$10
+           cmp #$12
            bcc ChkWtr
            iny
-           cmp #$19
+           cmp #$1d
            bcc ChkWtr
            iny
-           cmp #$1c
+           cmp #$22
            bcc ChkWtr                 ;note that for jumping, range is 0-4 for Y
            iny
 ChkWtr:    lda #$01                   ;set value here (apparently always set to 1)
@@ -4419,7 +4420,7 @@ X_Physics: ldy #$00
            lda Player_State           ;if mario is on the ground, branch
            beq ProcPRun
            lda Player_XSpeedAbsolute  ;check something that seems to be related
-           cmp #$19                   ;to mario's speed
+           cmp #$1d                   ;to mario's speed
            bcs GetXPhy                ;if =>$19 branch here
            bcc ChkRFast               ;if not branch elsewhere
 ProcPRun:  iny                        ;if mario on the ground, increment Y
@@ -4439,7 +4440,7 @@ ChkRFast:  iny                        ;if running timer not set or level type is
            lda RunningSpeed
            bne FastXSp                ;if running speed set here, branch
            lda Player_XSpeedAbsolute
-           cmp #$21                   ;otherwise check player's walking/running speed
+           cmp #$27                   ;otherwise check player's walking/running speed
            bcc GetXPhy                ;if less than a certain amount, branch ahead
 FastXSp:   inc $00                    ;if running speed set or speed => $21 increment $00
            jmp GetXPhy                ;and jump ahead
@@ -4456,7 +4457,7 @@ GetXPhy2:  lda MaxRightXSpdData,y     ;get maximum speed to the right
            ldy $00                    ;get other value in memory
            lda FrictionData,y         ;get value using value in memory as offset
            sta FrictionAdderLow
-           lda #$00
+           lda #$01
            sta FrictionAdderHigh      ;init something here
            lda PlayerFacingDir
            cmp Player_MovingDir       ;check facing direction against moving direction
@@ -4468,15 +4469,15 @@ ExitPhy:   rts                        ;and then leave
 ;-------------------------------------------------------------------------------------
 
 PlayerAnimTmrData:
-      .byte $02, $04, $07
+      .byte $02, $03, $05
 
 GetPlayerAnimSpeed:
             ldy #$00                   ;initialize offset in Y
             lda Player_XSpeedAbsolute  ;check player's walking/running speed
-            cmp #$1c                   ;against preset amount
+            cmp #$20                   ;against preset amount
             bcs SetRunSpd              ;if greater than a certain amount, branch ahead
             iny                        ;otherwise increment Y
-            cmp #$0e                   ;compare against lower amount
+            cmp #$10                   ;compare against lower amount
             bcs ChkSkid                ;if greater than this but not greater than first, skip increment
             iny                        ;otherwise increment Y again
 ChkSkid:    lda SavedJoypadBits        ;get controller bits
@@ -4489,7 +4490,7 @@ ChkSkid:    lda SavedJoypadBits        ;get controller bits
 SetRunSpd:  sta RunningSpeed           ;store zero or running speed here
             jmp SetAnimSpd
 ProcSkid:   lda Player_XSpeedAbsolute  ;check player's walking/running speed
-            cmp #$0b                   ;against one last amount
+            cmp #$0d                   ;against one last amount
             bcs SetAnimSpd             ;if greater than this amount, branch
             lda PlayerFacingDir
             sta Player_MovingDir       ;otherwise use facing direction to set moving direction
@@ -4600,7 +4601,7 @@ BublLoop: stx ObjectOffset            ;store offset
 BublExit: rts                         ;then leave
 
 FireballXSpdData:
-      .byte $40, $c0
+      .byte $4c, $b4
 
 FireballObjCore:
          stx ObjectOffset             ;store offset as current object
@@ -4625,7 +4626,7 @@ FireballObjCore:
          dey                          ;decrement to use as offset here
          lda FireballXSpdData,y       ;set horizontal speed of fireball accordingly
          sta Fireball_X_Speed,x
-         lda #$04                     ;set vertical speed of fireball
+         lda #$05                     ;set vertical speed of fireball
          sta Fireball_Y_Speed,x
          lda #$07
          sta Fireball_BoundBoxCtrl,x  ;set bounding box size control for fireball
@@ -4634,9 +4635,9 @@ RunFB:   txa                          ;add 7 to offset to use
          clc                          ;as fireball offset for next routines
          adc #$07
          tax
-         lda #$50                     ;set downward movement force here
+         lda #$60                     ;set downward movement force here
          sta $00
-         lda #$03                     ;set maximum speed here
+         lda #$05                     ;set maximum speed here
          sta $02
          lda #$00
          jsr ImposeGravity            ;do sub here to impose gravity on fireball and move vertically
@@ -4736,7 +4737,7 @@ RunGameTimer:
            bne ResGTCtrl              ;if timer not at 100, branch to reset game timer control
            lda #TimeRunningOutMusic
            sta EventMusicQueue        ;otherwise load time running out music
-ResGTCtrl: lda #$18                   ;reset game timer control
+ResGTCtrl: lda #$14                   ;reset game timer control
            sta GameTimerCtrlTimer
            jmp Enter_UpdateGameTimer  ;do sub to update the display
 TimeUpOn:  sta PlayerStatus           ;init player status (note A will always be zero here)
@@ -4940,7 +4941,7 @@ ExCannon: rts                        ;then leave
 ;--------------------------------
 
 BulletBillXSpdData:
-      .byte $18, $e8
+      .byte $1c, $e4
 
 BulletBillHandler:
            lda TimerControl          ;if master timer control set,
@@ -4965,7 +4966,7 @@ SetupBB:   sty Enemy_MovingDir,x     ;set bullet bill's moving direction
            bcc KillBB                ;to cannon either on left or right side, thus branch
            lda #$01
            sta Enemy_State,x         ;otherwise set bullet bill's state
-           lda #$0a
+           lda #$9
            sta EnemyFrameTimer,x     ;set enemy frame timer
            lda #Sfx_Blast
            sta Square2SoundQueue     ;play fireworks/gunfire sound
@@ -5000,7 +5001,7 @@ ProcHammerObj:
           clc                        ;add 13 bytes to use
           adc #$0d                   ;proper misc object
           tax                        ;return offset to X
-          lda #$10
+          lda #$23
           sta $00                    ;set downward movement force
           lda #$0f
           sta $01                    ;set upward movement force (not used)
@@ -5011,7 +5012,7 @@ ProcHammerObj:
           jsr MoveObjectHorizontally ;do sub to move it horizontally
           ldx ObjectOffset           ;get original misc object offset
           jmp RunAllH                ;branch to essential subroutines
-SetHSpd:  lda #$fe
+SetHSpd:  lda #$fd
           sta Misc_Y_Speed,x         ;set hammer's vertical speed
           lda Enemy_State,y          ;get enemy object state
           and #%11110111             ;mask out d3
@@ -5204,7 +5205,7 @@ HandlePipeEntry:
          lda $01
          cmp #$10                  ;check left foot metatile for warp pipe left metatile
          bne ExPipeE               ;branch to leave if not found
-         lda #$30
+         lda #$28
          sta ChangeAreaTimer       ;set timer for change of area
          lda #$03
          sta GameEngineSubroutine  ;set to run vertical pipe entry routine on next frame
@@ -6357,7 +6358,7 @@ PutMTileB: sta Block_Metatile,x     ;store whatever metatile be appropriate here
            ldy $02                  ;get vertical high nybble offset
            lda #$23
            sta ($06),y              ;write blank metatile $23 to block buffer
-           lda #$10
+           lda #$0c
            sta BlockBounceTimer     ;set block bounce timer
            pla                      ;pull original metatile from stack
            sta $05                  ;and save here
@@ -6688,7 +6689,7 @@ MovePlayerVertically:
          bne ExXMove             ;branch to leave if so
 NoJSChk: lda VerticalForce       ;dump vertical force 
          sta $00
-         lda #$04                ;set maximum vertical speed here
+         lda #$05                ;set maximum vertical speed here
          jmp ImposeGravitySprObj ;then jump to move player vertically
 
 ;--------------------------------
@@ -6730,15 +6731,15 @@ MoveDropPlatform:
       bne SetMdMax  ;skip ahead of other value set here
 
 MoveEnemySlowVert:
-          ldy #$0f         ;set movement amount for bowser/other objects
+          ldy #$12         ;set movement amount for bowser/other objects
 SetMdMax: lda #$02         ;set maximum speed in A
           bne SetXMoveAmt  ;unconditional branch
 
 ;--------------------------------
 
 MoveJ_EnemyVertically:
-             ldy #$1c                ;set movement amount for podoboo/other objects
-SetHiMax:    lda #$03                ;set maximum speed in A
+             ldy #$1f                ;set movement amount for podoboo/other objects
+SetHiMax:    lda #$04                ;set maximum speed in A
 SetXMoveAmt: sty $00                 ;set movement amount here
              inx                     ;increment X for enemy offset
              jsr ImposeGravitySprObj ;do a sub to move enemy object downwards
@@ -6756,7 +6757,7 @@ ResidualGravityCode:
 
 ImposeGravityBlock:
       ldy #$01       ;set offset for maximum speed
-      lda #$50       ;set movement amount here
+      lda #$58       ;set movement amount here
       sta $00
       lda MaxSpdBlockData,y    ;get maximum speed
 
@@ -6889,7 +6890,7 @@ InitRetainerObj:
 ;--------------------------------
 
 NormalXSpdData:
-      .byte $f8, $f4
+      .byte $f6, $f1
 
 InitNormalEnemy:
          ldy #$01              ;load offset of 1 by default
@@ -7066,7 +7067,7 @@ DifLoop:  lda PRDiffAdjustData,y     ;get three values and save them
           ldx ObjectOffset           ;get enemy object buffer offset
           jsr PlayerLakituDiff       ;move enemy, change direction, get value - difference
           ldy Player_X_Speed         ;check player's horizontal speed
-          cpy #$08
+          cpy #$0c
           bcs SetSpSpd               ;if moving faster than a certain amount, branch elsewhere
           tay                        ;otherwise save value in A to Y for now
           lda PseudoRandomBitReg+1,x
@@ -7095,7 +7096,7 @@ ChpChpEx: rts
 ;--------------------------------
 
 FirebarSpinSpdData:
-      .byte $28, $38, $28, $38, $28
+      .byte $30, $43, $30, $43, $30
 
 FirebarSpinDirData:
       .byte $00, $00, $10, $10, $00
@@ -7137,9 +7138,9 @@ FlyCCXPositionData:
       .byte $70, $40, $90, $68
 
 FlyCCXSpeedData:
-      .byte $0e, $05, $06, $0e
-      .byte $1c, $20, $10, $0c
-      .byte $1e, $22, $18, $14
+      .byte $11, $07, $08, $0a
+      .byte $23, $28, $15, $10
+      .byte $22, $2c, $1f, $1b
 
 FlyCCTimerData:
       .byte $10, $60, $20, $48
@@ -7164,13 +7165,13 @@ MaxCC:   sty $00                    ;store whatever pseudorandom bits are in Y
          and #%00000011             ;get last two bits of LSFR, first part
          sta $00                    ;and store in two places
          sta $01
-         lda #$fb                   ;set vertical speed for cheep-cheep
+         lda #$fa                   ;set vertical speed for cheep-cheep
          sta Enemy_Y_Speed,x
          lda #$00                   ;load default value
          ldy Player_X_Speed         ;check player's horizontal speed
          beq GSeed                  ;if player not moving left or right, skip this part
          lda #$04
-         cpy #$19                   ;if moving to the right but not very quickly,
+         cpy #$1d                   ;if moving to the right but not very quickly,
          bcc GSeed                  ;do not change A
          asl                        ;otherwise, multiply A by 2
 GSeed:   pha                        ;save to stack
@@ -7439,7 +7440,7 @@ NextFSlot: dey                    ;move onto the next slot
 InitJumpGPTroopa:
            lda #$02                  ;set for movement to the left
            sta Enemy_MovingDir,x
-           lda #$f8                  ;set horizontal speed
+           lda #$f6                  ;set horizontal speed
            sta Enemy_X_Speed,x
 TallBBox2: lda #$03                  ;set specific value for bounding box control
 SetBBox2:  sta Enemy_BoundBoxCtrl,x  ;set bounding box control then leave
@@ -7855,11 +7856,11 @@ HJump: lda HammerBroJumpLData,y    ;get jump length timer data using offset from
        sta HammerBroJumpTimer,x    ;store in jump timer
 
 MoveHammerBroXDir:
-         ldy #$fc                  ;move hammer bro a little to the left
+         ldy #$fb                  ;move hammer bro a little to the left
          lda FrameCounter
          and #%01000000            ;change hammer bro's direction every 64 frames
          bne Shimmy
-         ldy #$04                  ;if d6 set in counter, move him a little to the right
+         ldy #$05                  ;if d6 set in counter, move him a little to the right
 Shimmy:  sty Enemy_X_Speed,x       ;store horizontal speed
          ldy #$01                  ;set to face right by default
          jsr PlayerEnemyDiff       ;get horizontal difference between player and hammer bro
@@ -7867,7 +7868,7 @@ Shimmy:  sty Enemy_X_Speed,x       ;store horizontal speed
          iny                       ;set to face left
          lda EnemyIntervalTimer,x  ;check walking timer
          bne SetShim               ;if not yet expired, skip to set moving direction
-         lda #$f8
+         lda #$f6
          sta Enemy_X_Speed,x       ;otherwise, make the hammer bro walk left towards player
 SetShim: sty Enemy_MovingDir,x     ;set moving direction
 
@@ -7939,7 +7940,7 @@ MoveDefeatedEnemy:
       jmp MoveEnemyHorizontally      ;now move defeated enemy horizontally
 
 ChkKillGoomba:
-        cmp #$0e              ;check to see if enemy timer has reached
+        cmp #$0b              ;check to see if enemy timer has reached
         bne NKGmba            ;a certain point, and branch to leave if not
         lda Enemy_ID,x
         cmp #Goomba           ;check for goomba object
@@ -8044,7 +8045,7 @@ XMRight: sty Enemy_MovingDir,x        ;store as moving direction
 ;--------------------------------
 
 BlooberBitmasks:
-      .byte %00111111, %00000011
+      .byte %00000111, %00000001
 
 MoveBloober:
         lda Enemy_State,x
@@ -8147,7 +8148,7 @@ NoFD: rts                     ;leave
 
 ChkNearPlayer:
       lda Enemy_Y_Position,x    ;get vertical coordinate
-      adc #$10                  ;add sixteen pixels
+      adc #$0c                  ;add sixteen pixels
       cmp Player_Y_Position     ;compare result with player's vertical coordinate
       bcc Floatdown             ;if modified vertical less than player's, branch
       lda #$00
@@ -8494,50 +8495,16 @@ GetVAdder: sta $02                    ;store result here
 
 ;--------------------------------
 
-PRandomSubtracter:
-      .byte $f8, $a0, $70, $bd, $00
-
-FlyCCBPriority:
-      .byte $20, $20, $20, $00, $00
-
 MoveFlyingCheepCheep:
-        lda Enemy_State,x          ;check cheep-cheep's enemy state
-        and #%00100000             ;for d5 set
-        beq FlyCC                  ;branch to continue code if not set
-        lda #$00
-        sta Enemy_SprAttrib,x      ;otherwise clear sprite attributes
-        jmp MoveJ_EnemyVertically  ;and jump to move defeated cheep-cheep downwards
-FlyCC:  jsr MoveEnemyHorizontally  ;move cheep-cheep horizontally based on speed and force
-        ldy #$0d                   ;set vertical movement amount
-        lda #$05                   ;set maximum speed
-        jsr SetXMoveAmt            ;branch to impose gravity on flying cheep-cheep
-        lda Enemy_Y_MoveForce,x
-        lsr                        ;get vertical movement force and
-        lsr                        ;move high nybble to low
-        lsr
-        lsr
-        tay                        ;save as offset (note this tends to go into reach of code)
-        lda Enemy_Y_Position,x     ;get vertical position
-        sec                        ;subtract pseudorandom value based on offset from position
-        sbc PRandomSubtracter,y
-        bpl AddCCF                  ;if result within top half of screen, skip this part
-        eor #$ff
-        clc                        ;otherwise get two's compliment
-        adc #$01
-AddCCF: cmp #$08                   ;if result or two's compliment greater than eight,
-        bcs BPGet                  ;skip to the end without changing movement force
-        lda Enemy_Y_MoveForce,x
-        clc
-        adc #$10                   ;otherwise add to it
-        sta Enemy_Y_MoveForce,x
-        lsr                        ;move high nybble to low again
-        lsr
-        lsr
-        lsr
-        tay
-BPGet:  lda FlyCCBPriority,y       ;load bg priority data and store (this is very likely
-        sta Enemy_SprAttrib,x      ;broken or residual code, value is overwritten before
-        rts                        ;drawing it next frame), then leave
+        ldy #$20
+        lda Enemy_State,x          ;LDA $1E,X
+        and #$20
+        bne MoveFlyingCheepCheep2                      ;$CEE8
+        jsr MoveEnemyHorizontally  ;$BF07
+        ldy #$17
+MoveFlyingCheepCheep2:
+        lda #$05
+        jmp SetXMoveAmt            ;$BF9B
 
 ;--------------------------------
 ;$00 - used to hold horizontal difference
@@ -8620,7 +8587,7 @@ ChkPSpeed: lda $00
            beq SubDifAdj              ;if scroll speed not set, branch to same place
            iny                        ;otherwise increment offset
            lda Player_X_Speed
-           cmp #$19                   ;if player not running, branch
+           cmp #$1d                   ;if player not running, branch
            bcc ChkSpinyO
            lda ScrollAmount
            cmp #$02                   ;if scroll speed below a certain amount, branch
@@ -8891,7 +8858,7 @@ ProcessBowserHalf:
 ;$01 - used to hold sprite attribute data
 
 FlameTimerData:
-      .byte $bf, $40, $bf, $bf, $bf, $40, $40, $bf
+      .byte $80, $30, $30, $80, $80, $80, $30, $50
 
 SetFlameTimer:
       ldy BowserFlameTimerCtrl  ;load counter as offset
@@ -8905,10 +8872,10 @@ ExFl: rts
 ProcBowserFlame:
          lda TimerControl            ;if master timer control flag set,
          bne SetGfxF                 ;skip all of this
-         lda #$40                    ;load default movement force
+         lda #$70                    ;load default movement force
          ldy SecondaryHardMode
          beq SFlmX                   ;if secondary hard mode flag not set, use default
-         lda #$60                    ;otherwise load alternate movement force to go faster
+         lda #$90                    ;otherwise load alternate movement force to go faster
 SFlmX:   sta $00                     ;store value here
          lda Enemy_X_MoveForce,x
          sec                         ;subtract value from movement force
@@ -9382,7 +9349,7 @@ RightPlatform:
        sta $00                       ;store saved value here (residual code)
        lda PlatformCollisionFlag,x   ;check collision flag, if no collision between player
        bmi ExRPl                     ;and platform, branch ahead, leave speed unaltered
-       lda #$10
+       lda #$13
        sta Enemy_X_Speed,x           ;otherwise set new speed (gets moving if motionless)
        jsr PositionPlayerOnHPlat     ;use saved value from earlier sub to position player
 ExRPl: rts                           ;then leave
@@ -9703,7 +9670,7 @@ ResidualXSpdData:
       .byte $18, $e8
 
 KickedShellXSpdData:
-      .byte $30, $d0
+      .byte $38, $d8
 
 DemotedKoopaXSpdData:
       .byte $08, $f8
@@ -9795,12 +9762,14 @@ ChkForPlayerInjury:
           lda Player_Y_Speed     ;check player's vertical speed
           bmi ChkInj             ;perform procedure below if player moving upwards
           bne EnemyStomped       ;or not at all, and branch elsewhere if moving downwards
-ChkInj:   lda Enemy_ID,x         ;branch if enemy object < $07
-          cmp #Bloober
-          bcc ChkETmrs
-          lda Player_Y_Position  ;add 12 pixels to player's vertical position
-          clc
-          adc #$0c
+ChkInj:
+          lda #$14
+          ldy Enemy_ID,x
+          cpy #$14               ;FlyCheepCheepFrenzy or FlyingCheepCheep          
+          bne ChkInj2                  ;$d909
+          lda #Bloober	 ;#$07
+ChkInj2:
+          adc Player_Y_Position  ;$ce
           cmp Enemy_Y_Position,x ;compare modified player's position to enemy's position
           bcc EnemyStomped       ;branch if this player's position above (less than) enemy's
 ChkETmrs: lda StompTimer         ;check stomp timer
@@ -9826,7 +9795,7 @@ ForceInjury:
           sta PlayerStatus          ;otherwise set player's status to small
           lda #$08
           sta InjuryTimer           ;set injured invincibility timer
-          asl
+          lda #$10
           sta Square1SoundQueue     ;play pipedown/injury sound
           jsr GetPlayerColors       ;change player's palette if necessary
           lda #$0a                  ;set subroutine to run on next frame
@@ -9912,7 +9881,7 @@ ChkForDemoteKoopa:
       jmp SBnce                  ;then move onto something else
 
 RevivalRateData:
-      .byte $10, $0b
+      .byte $0d, $09
 
 HandleStompedShellE:
        lda #$04                   ;set defeated state for enemy
@@ -10387,8 +10356,13 @@ SolidOrClimb:
        beq NYSpd              ;branch ahead and do not play sound
        lda #Sfx_Bump
        sta Square1SoundQueue  ;otherwise load bump sound
-NYSpd: lda #$01               ;set player's vertical speed to nullify
-       sta Player_Y_Speed     ;jump or swim
+NYSpd:
+       ldy #$01
+       lda AreaType           ;$074E
+       bne NySpd2                  ;$DCFC
+       dey 
+NySpd2:
+       sty Player_Y_Speed
 
 DoFootCheck:
       ldy $eb                    ;get block buffer adder offset
@@ -10425,7 +10399,7 @@ ContChk:  jsr ChkInvisibleMTiles     ;do sub to check for hidden coin or 1-up bl
           ldy JumpspringAnimCtrl     ;if jumpspring animating right now,
           bne InitSteP               ;branch ahead
           ldy $04                    ;check lower nybble of vertical coordinate returned
-          cpy #$05                   ;from collision detection routine
+          cpy #$06                   ;from collision detection routine
           bcc LandPlyr               ;if lower nybble < 5, branch
           lda Player_MovingDir
           sta $00                    ;use player's moving direction as temp variable
@@ -10535,7 +10509,7 @@ StopPlayerMove:
 ExCSM: rts                       ;leave
       
 AreaChangeTimerData:
-      .byte $a0, $34
+      .byte $85, $2b
 
 HandleCoinMetatile:
       jsr ErACM             ;do sub to erase coin metatile from block buffer
@@ -10677,7 +10651,7 @@ ChkForLandJumpSpring:
         bcc ExCJSp                  ;if carry not set, jumpspring not found, therefore leave
         lda #$70
         sta VerticalForce           ;otherwise set vertical movement force for player
-        lda #$f9
+        lda #$f8
         sta JumpspringForce         ;set default jumpspring force
         lda #$03
         sta JumpspringTimer         ;set jumpspring timer to be used later
@@ -11152,7 +11126,7 @@ BoundBoxCtrlData:
       .byte $00, $00, $30, $0d
       .byte $00, $00, $08, $08
       .byte $06, $04, $0a, $08
-      .byte $03, $0e, $0d, $14
+      .byte $03, $0c, $0d, $14
       .byte $00, $02, $10, $15
       .byte $04, $04, $0c, $1c
 
@@ -11470,8 +11444,6 @@ RetYC: and #%00001111              ;and mask out high nybble
 
 ;-------------------------------------------------------------------------------------
 
-;unused byte
-      .byte $ff
 
 ;-------------------------------------------------------------------------------------
 ;$00 - offset to vine Y coordinate adder
@@ -12967,7 +12939,7 @@ ProcOnGroundActs:
         ora Left_Right_Buttons     ;and left/right controller bits
         beq NonAnimatedActs        ;if no speed or buttons pressed, use standing offset
         lda Player_XSpeedAbsolute  ;load walking/running speed
-        cmp #$09
+        cmp #$0a
         bcc ActionWalkRun          ;if less than a certain amount, branch, too slow to skid
         lda Player_MovingDir       ;otherwise check to see if moving direction
         and PlayerFacingDir        ;and facing direction are the same
@@ -13587,12 +13559,14 @@ PosJSpr:   lda Jumpspring_FixedYPos,x  ;get permanent vertical position
            beq BounceJS                ;skip to next part if A not pressed
            and PreviousA_B_Buttons     ;check for A button pressed in previous frame
            bne BounceJS                ;skip to next part if so
-           lda #$f4
+           lda #$f2
            sta JumpspringForce         ;otherwise write new jumpspring force here
 BounceJS:  cpy #$03                    ;check frame control offset again
            bne DrawJSpr                ;skip to last part if not yet at fifth frame ($03)
            lda JumpspringForce
            sta Player_Y_Speed          ;store jumpspring force as player's new vertical speed
+           lda #$40
+           sta VerticalForce
            lda #$00
            sta JumpspringAnimCtrl      ;initialize jumpspring frame control
 DrawJSpr:  jsr RelativeEnemyPosition   ;get jumpspring's relative coordinates
@@ -13844,7 +13818,7 @@ HammerEnemyOfsData:
       .byte $06, $06, $06
 
 HammerXSpdData:
-      .byte $10, $f0
+      .byte $14, $ec
 
 SpawnHammerObj:
           lda PseudoRandomBitReg+1 ;get pseudorandom bits from
