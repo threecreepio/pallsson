@@ -1,9 +1,33 @@
+# Pallsson SMB1 Practise ROM
+
+This is a small patch to the fantastic Pellsson practice rom (https://github.com/pellsson/smb) allowing PAL version practice rather than NTSC.
+
+Note that this **only** updates the SMB1 version. Lost Levels and Scenarios are left untouched, and will run slow if you attempt to play them on a PAL system.
+
+I have not verified that framerules etc function properly yet, just that it loads and runs.
+
+//threecreepio
+
+## Download & Installation
+
+First download the desired version below:
+
+- [Version 5.4 - IPS](https://github.com/threecreepio/pallsson/raw/master/pallsson-v5.4.ips)
+
+Then simply apply that IPS (using for instance Lunar IPS) to the an original, unmodified version of the Super Mario Bros. (Europe) (Rev A) ROM. 
+
+The MD5 checksum for the ROM you should be using is `673913a23cd612daf5ad32d4085e0760`.
+
+
+
+
+
 # SMB & SMB2J Practice ROM
 
 A speedrun practice ROM for Super Mario Bros. and Super Mario Bros 2 - The Lost Levels.
 
 For feature requests or bug reports, please visit the [issue tracker](https://github.com/pellsson/smb/issues).
-
+"
 ## Major Version 5 (Current 5.4)
 
 ### New Features 
@@ -69,14 +93,6 @@ save in Zelda (without savestates), power off the system, and load (without usin
 - Practice with **Slow Motion**.
 - Practice with **Frame Advance** (A on second controller to advance. Start on second to exit.).
 - And a lot more...
-
-## Download & Installation
-
-First download the desired version below:
-
-- [Version 5.4 - IPS](https://github.com/pellsson/smb/raw/master/smb-v5.4.ips)
-
-Then simply apply that IPS (using for instance Lunar IPS) to the an original, unmodified version of the Super Mario Bros. (US/World) ROM. *DO NOT* use The Lost Levels. The MD5 checksum for the ROM you should be using is `811b027eaf99c2def7b933c5208636de`.
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 	<input type="hidden" name="cmd" value="_donations" />

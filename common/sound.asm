@@ -344,7 +344,7 @@ ContinueCGrabTTick:
         lda Squ2_SfxLenCounter  ;check for time to play second tone yet
         cmp #$30                ;timer tick sound also executes this, not sure why
         bne N2Tone
-        lda #$54                ;if so, load the tone directly into the reg
+        lda #$4e                ;if so, load the tone directly into the reg
         sta SND_SQUARE2_REG+2
 N2Tone: bne DecrementSfx2Length
 
@@ -969,7 +969,7 @@ MusicHeaderData:
 TimeRunningOutHdr:    .byte $08, <TimeRunOutMusData, >TimeRunOutMusData, $27, $18
 Star_CloudHdr:        .byte $20, <Star_CloudMData, >Star_CloudMData, $2e, $1a, $40
 EndOfLevelMusHdr:     .byte $20, <WinLevelMusData, >WinLevelMusData, $3d, $21
-ResidualHeaderData:   .byte $20, $c4, $fc, $3f, $1d
+ResidualHeaderData:   .byte $20, $c5, $fc, $3f, $1d
 UndergroundMusHdr:    .byte $18, <UndergroundMusData, >UndergroundMusData, $00, $00
 SilenceHdr:           .byte $08, <SilenceData, >SilenceData, $00
 CastleMusHdr:         .byte $00, <CastleMusData, >CastleMusData, $93, $62
@@ -1263,30 +1263,30 @@ VictoryMusData:
       .byte $26, $22, $1e, $1c, $18, $1e, $22, $0c, $14
 
 ;unused space
-      .byte $ff, $ff, $ff
+      .byte $ff, $ff
 
 FreqRegLookupTbl:
-      .byte $00, $88, $00, $2f, $00, $00
-      .byte $02, $a6, $02, $80, $02, $5c, $02, $3a
-      .byte $02, $1a, $01, $df, $01, $c4, $01, $ab
-      .byte $01, $93, $01, $7c, $01, $67, $01, $53
-      .byte $01, $40, $01, $2e, $01, $1d, $01, $0d
-      .byte $00, $fe, $00, $ef, $00, $e2, $00, $d5
-      .byte $00, $c9, $00, $be, $00, $b3, $00, $a9
-      .byte $00, $a0, $00, $97, $00, $8e, $00, $86
-      .byte $00, $77, $00, $7e, $00, $71, $00, $54
-      .byte $00, $64, $00, $5f, $00, $59, $00, $50
-      .byte $00, $47, $00, $43, $00, $3b, $00, $35
-      .byte $00, $2a, $00, $23, $04, $75, $03, $57
-      .byte $02, $f9, $02, $cf, $01, $fc, $00, $6a
+      .byte $00, $88, $00, $2B, $00, $00
+      .byte $02, $72, $02, $4F, $02, $2E, $02, $0E
+      .byte $01, $F1, $01, $BA, $01, $A1, $01, $8A
+      .byte $01, $74, $01, $5F, $01, $4B, $01, $39
+      .byte $01, $27, $01, $17, $01, $07, $00, $F8
+      .byte $00, $EA, $00, $DD, $00, $D1, $00, $C5
+      .byte $00, $BA, $00, $AF, $00, $A5, $00, $9C
+      .byte $00, $94, $00, $8B, $00, $83, $00, $7C
+      .byte $00, $6E, $00, $74, $00, $68, $00, $4E
+      .byte $00, $5C, $00, $58, $00, $52, $00, $4A
+      .byte $00, $42, $00, $3E, $00, $36, $00, $31
+      .byte $00, $27, $00, $20, $04, $1D, $03, $15
+      .byte $02, $BE, $02, $98, $01, $D5, $00, $62
 
 MusicLengthLookupTbl:
-      .byte $05, $0a, $14, $28, $50, $1e, $3c, $02
-      .byte $04, $08, $10, $20, $40, $18, $30, $0c
-      .byte $03, $06, $0c, $18, $30, $12, $24, $08
-      .byte $36, $03, $09, $06, $12, $1b, $24, $0c
-      .byte $24, $02, $06, $04, $0c, $12, $18, $08
-      .byte $12, $01, $03, $02, $06, $09, $0c, $04
+      .byte $04, $08, $10, $20, $40, $18, $30, $0C
+      .byte $03, $06, $0C, $18, $30, $12, $24, $08
+      .byte $03, $06, $0C, $18, $30, $12, $24, $08
+      .byte $24, $02, $06, $04, $0C, $12, $18, $08
+      .byte $1B, $01, $05, $03, $09, $0D, $12, $06
+      .byte $12, $01, $03, $02, $06, $09, $0C, $04
 
 EndOfCastleMusicEnvData:
       .byte $98, $99, $9a, $9b
