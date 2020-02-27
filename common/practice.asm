@@ -1718,11 +1718,11 @@ FrameToTimeInner:
 		sta N+2
 		lda PROD+3
 		sta N+3
-		lda #<60098
+		lda #<50007
 		sta N+0
-		lda #>60098
+		lda #>50007
 		sta N+1
-		jsr div32_16_16 ; x / 60098
+		jsr div32_16_16 ; x / 50007
 
 		lda #0
 		sta N+2
