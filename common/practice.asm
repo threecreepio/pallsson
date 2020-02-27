@@ -426,7 +426,7 @@ RedrawFrameNumbers:
 		jmp ReturnBank
 
 UpdateFrameRule:
-		lda #$14
+		lda #$11
 		cmp IntervalTimerControl
 		bne NotEvenFrameRule
 		lda #$01
