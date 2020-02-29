@@ -4,7 +4,7 @@ This is a small patch to the fantastic Pellsson practice rom (https://github.com
 
 Note that this **only** updates the SMB1 version. Lost Levels and Scenarios are left untouched, and will run slow if you attempt to play them on a PAL system.
 
-I have not verified that framerules etc function properly yet, just that it loads and runs.
+Probably still has bugs left to iron out.
 
 //threecreepio
 
