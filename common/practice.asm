@@ -6,109 +6,109 @@
 ; Practice stuff
 ;
 quick_resume_0:
-	.byte $A5, $00, $00, $00, $00, $00, $00, $00 ; Base for 0
-	.byte $26, $90, $DD, $FC, $47, $BF, $30, $00 ; Base for 100
-	.byte $81, $98, $9B, $AA, $9D, $C8, $F3, $00 ; Base for 200
-	.byte $2A, $A2, $F7, $B2, $5D, $39, $83, $00 ; Base for 300
-	.byte $9F, $14, $2A, $02, $56, $52, $FE, $00 ; Base for 400
-	.byte $9F, $4A, $74, $E0, $09, $C9, $DA, $00 ; Base for 500
-	.byte $F2, $E9, $0C, $DE, $C7, $7A, $F4, $00 ; Base for 600
-	.byte $18, $00, $30, $30, $50, $30, $90, $00 ; Base for 700
-	.byte $02, $AC, $A9, $F0, $A3, $42, $04, $00 ; Base for 800
-	.byte $00, $B8, $B9, $C8, $BB, $2A, $5C, $00 ; Base for 900
-	.byte $BD, $A0, $DB, $9A, $2D, $19, $43, $00 ; Base for 1000
-	.byte $CF, $C8, $57, $C7, $68, $E6, $37, $00 ; Base for 1100
-	.byte $12, $B4, $91, $F8, $DB, $2A, $9C, $00 ; Base for 1200
-	.byte $55, $DB, $70, $C6, $27, $AB, $E4, $00 ; Base for 1300
-	.byte $E1, $2C, $EE, $B7, $6A, $04, $D0, $00 ; Base for 1400
-	.byte $36, $9A, $F7, $C2, $2D, $A9, $F2, $00 ; Base for 1500
-	.byte $7C, $10, $E8, $C9, $18, $8A, $BB, $00 ; Base for 1600
-	.byte $13, $4B, $6D, $FB, $20, $D6, $97, $00 ; Base for 1700
-	.byte $6A, $06, $D2, $DF, $7A, $C4, $31, $00 ; Base for 1800
-	.byte $1E, $DA, $E7, $52, $9C, $39, $01, $00 ; Base for 1900
-	.byte $15, $87, $AC, $A3, $FA, $BD, $48, $00 ; Base for 2000
-	.byte $B3, $20, $46, $06, $8A, $87, $92, $00 ; Base for 2100
-	.byte $D2, $3D, $99, $E2, $D1, $14, $B6, $00 ; Base for 2200
-	.byte $51, $B7, $14, $7A, $52, $A6, $03, $00 ; Base for 2300
-	.byte $93, $98, $BF, $8E, $F1, $EC, $0F, $00 ; Base for 2400
-	.byte $69, $F3, $20, $C6, $87, $0A, $04, $00 ; Base for 2500
-	.byte $9F, $DE, $E1, $5C, $9E, $27, $1B, $00 ; Base for 2600
-	.byte $D3, $52, $F4, $51, $B9, $1A, $68, $00 ; Base for 2700
-	.byte $29, $37, $65, $0B, $C1, $D6, $55, $00 ; Base for 2800
-	.byte $47, $43, $CD, $4A, $D0, $45, $E5, $00 ; Base for 2900
-	.byte $28, $EC, $BD, $64, $1E, $D6, $EB, $00 ; Base for 3000
-	.byte $29, $49, $1B, $89, $BE, $AD, $D0, $00 ; Base for 3100
+        .byte $a5, $00, $00, $00, $00, $00, $00, $00 ; Base for 0
+        .byte $f8, $bf, $4e, $30, $ac, $cd, $94, $00 ; Base for 100
+        .byte $23, $3d, $7b, $01, $f7, $f4, $1b, $00 ; Base for 200
+        .byte $c0, $6b, $eb, $3c, $ea, $93, $46, $00 ; Base for 300
+        .byte $e2, $2d, $e9, $b2, $61, $05, $c7, $00 ; Base for 400
+        .byte $b4, $29, $41, $13, $91, $b6, $95, $00 ; Base for 500
+        .byte $8c, $b7, $ae, $c1, $9c, $1f, $27, $00 ; Base for 600
+        .byte $f2, $e9, $0c, $de, $c7, $7a, $f4, $00 ; Base for 700
+        .byte $bb, $d0, $a7, $06, $48, $44, $d4, $00 ; Base for 800
+        .byte $be, $a1, $dc, $9f, $26, $18, $54, $00 ; Base for 900
+        .byte $d5, $88, $23, $33, $75, $13, $f9, $00 ; Base for 1000
+        .byte $cb, $ae, $39, $65, $17, $dd, $f2, $00 ; Base for 1100
+        .byte $30, $48, $28, $b8, $e9, $98, $4b, $00 ; Base for 1200
+        .byte $b7, $1c, $72, $4a, $ae, $3b, $67, $00 ; Base for 1300
+        .byte $12, $b4, $91, $f8, $db, $2a, $9c, $00 ; Base for 1400
+        .byte $56, $a8, $05, $55, $5f, $f5, $4a, $00 ; Base for 1500
+        .byte $a2, $39, $7d, $0f, $f5, $ea, $01, $00 ; Base for 1600
+        .byte $2e, $fc, $a1, $58, $1a, $aa, $9f, $00 ; Base for 1700
+        .byte $87, $60, $6e, $ae, $73, $2f, $c9, $00 ; Base for 1800
+        .byte $2b, $9f, $c8, $f7, $66, $88, $45, $00 ; Base for 1900
+        .byte $e7, $5a, $94, $21, $09, $4b, $59, $00 ; Base for 2000
+        .byte $6a, $06, $d2, $df, $7a, $c4, $31, $00 ; Base for 2100
+        .byte $56, $18, $b4, $85, $ec, $e7, $3e, $00 ; Base for 2200
+        .byte $ca, $83, $16, $10, $3c, $1c, $64, $00 ; Base for 2300
+        .byte $eb, $74, $a2, $4b, $0f, $99, $86, $00 ; Base for 2400
+        .byte $c5, $fe, $75, $89, $62, $70, $b4, $00 ; Base for 2500
+        .byte $3f, $ef, $90, $4f, $6f, $f1, $2e, $00 ; Base for 2600
+        .byte $84, $51, $59, $fb, $48, $be, $2f, $00 ; Base for 2700
+        .byte $93, $98, $bf, $8e, $f1, $ec, $0f, $00 ; Base for 2800
+        .byte $c4, $15, $9d, $b6, $8d, $e0, $fb, $00 ; Base for 2900
+        .byte $f1, $18, $fa, $cb, $3e, $a8, $d5, $00 ; Base for 3000
+        .byte $a3, $1a, $5c, $68, $d0, $01, $a1, $00 ; Base for 3100
 quick_resume_32:
-	.byte $1D, $D1, $EA, $49, $9D, $0E, $34, $00 ; Base for 3200
-	.byte $12, $D4, $F1, $58, $BA, $0B, $7F, $00 ; Base for 3300
-	.byte $0C, $88, $91, $80, $A3, $A2, $E5, $00 ; Base for 3400
-	.byte $90, $5F, $7F, $C1, $3E, $BC, $C1, $00 ; Base for 3500
-	.byte $77, $2D, $C3, $98, $1F, $2F, $11, $00 ; Base for 3600
-	.byte $EC, $BF, $66, $18, $D4, $E5, $4C, $00 ; Base for 3700
-	.byte $7A, $68, $9C, $4D, $75, $EF, $04, $00 ; Base for 3800
-	.byte $DC, $E7, $5E, $90, $2D, $0D, $57, $00 ; Base for 3900
-	.byte $47, $07, $89, $86, $95, $98, $B3, $00 ; Base for 4000
-	.byte $20, $68, $28, $F8, $A9, $58, $0A, $00 ; Base for 4100
-	.byte $92, $F1, $D4, $37, $9F, $F0, $CF, $00 ; Base for 4200
-	.byte $44, $E6, $6F, $A3, $7C, $3A, $C2, $00 ; Base for 4300
-	.byte $5C, $12, $AA, $8F, $DA, $C5, $70, $00 ; Base for 4400
-	.byte $26, $56, $1A, $B6, $83, $EE, $E9, $00 ; Base for 4500
-	.byte $66, $AA, $67, $33, $FD, $9A, $61, $00 ; Base for 4600
-	.byte $DF, $52, $EC, $49, $91, $02, $20, $00 ; Base for 4700
-	.byte $A8, $61, $31, $F3, $90, $77, $57, $00 ; Base for 4800
-	.byte $47, $1F, $91, $AE, $8D, $D0, $CB, $00 ; Base for 4900
-	.byte $76, $3C, $D0, $A9, $08, $5A, $4A, $00 ; Base for 5000
-	.byte $CE, $AD, $30, $6A, $0A, $DE, $CB, $00 ; Base for 5100
-	.byte $94, $8B, $A2, $B5, $F0, $9B, $7A, $00 ; Base for 5200
-	.byte $B8, $39, $49, $3B, $A9, $DE, $8D, $00 ; Base for 5300
-	.byte $7C, $1E, $E6, $DB, $16, $A0, $8D, $00 ; Base for 5400
-	.byte $8B, $12, $04, $20, $28, $68, $38, $00 ; Base for 5500
-	.byte $49, $25, $B7, $FC, $93, $6A, $4C, $00 ; Base for 5600
-	.byte $E5, $1A, $D0, $E5, $44, $8E, $07, $00 ; Base for 5700
-	.byte $4F, $6B, $F5, $22, $C8, $8D, $1C, $00 ; Base for 5800
-	.byte $D3, $8A, $2D, $39, $63, $11, $D7, $00 ; Base for 5900
-	.byte $CD, $C4, $5F, $D7, $68, $C6, $17, $00 ; Base for 6000
-	.byte $F9, $F8, $0B, $FB, $EC, $1B, $C3, $00 ; Base for 6100
-	.byte $7B, $EF, $18, $C6, $F7, $7A, $94, $00 ; Base for 6200
-	.byte $EC, $3D, $E5, $9E, $55, $69, $C3, $00 ; Base for 6300
+        .byte $0c, $ce, $d7, $4a, $e4, $71, $b9, $00 ; Base for 3200
+        .byte $3f, $17, $69, $47, $95, $1a, $30, $00 ; Base for 3300
+        .byte $c0, $a7, $26, $68, $24, $f4, $bd, $00 ; Base for 3400
+        .byte $28, $ec, $bd, $64, $1e, $d6, $eb, $00 ; Base for 3500
+        .byte $ac, $1b, $43, $75, $f3, $18, $fe, $00 ; Base for 3600
+        .byte $7a, $2e, $da, $87, $32, $3c, $58, $00 ; Base for 3700
+        .byte $a3, $02, $44, $40, $c8, $49, $d9, $00 ; Base for 3800
+        .byte $d8, $d7, $66, $c8, $05, $95, $9e, $00 ; Base for 3900
+        .byte $2d, $33, $69, $0f, $dd, $c2, $79, $00 ; Base for 4000
+        .byte $ce, $97, $0a, $24, $30, $78, $18, $00 ; Base for 4100
+        .byte $77, $2d, $c3, $98, $1f, $2f, $11, $00 ; Base for 4200
+        .byte $d7, $c6, $69, $e5, $36, $fc, $91, $00 ; Base for 4300
+        .byte $c3, $c2, $45, $c1, $4a, $c8, $5d, $00 ; Base for 4400
+        .byte $4e, $ba, $27, $53, $1d, $bb, $80, $00 ; Base for 4500
+        .byte $64, $82, $4b, $4f, $d9, $46, $f4, $00 ; Base for 4600
+        .byte $47, $67, $e9, $26, $f4, $b9, $50, $00 ; Base for 4700
+        .byte $f3, $d8, $3f, $8f, $f0, $ef, $0e, $00 ; Base for 4800
+        .byte $92, $f1, $d4, $37, $9f, $f0, $cf, $00 ; Base for 4900
+        .byte $59, $69, $db, $08, $be, $af, $d2, $00 ; Base for 5000
+        .byte $74, $14, $fc, $d5, $2c, $86, $df, $00 ; Base for 5100
+        .byte $23, $c9, $8e, $1d, $01, $3b, $39, $00 ; Base for 5200
+        .byte $ee, $91, $4c, $6e, $f6, $2b, $c7, $00 ; Base for 5300
+        .byte $d0, $4b, $eb, $7c, $aa, $53, $07, $00 ; Base for 5400
+        .byte $5b, $3f, $89, $f6, $e5, $08, $c2, $00 ; Base for 5500
+        .byte $a8, $61, $31, $f3, $90, $77, $57, $00 ; Base for 5600
+        .byte $4f, $1f, $81, $be, $bd, $c0, $bb, $00 ; Base for 5700
+        .byte $33, $3f, $59, $27, $95, $da, $f1, $00 ; Base for 5800
+        .byte $da, $59, $ed, $5e, $84, $39, $31, $00 ; Base for 5900
+        .byte $85, $92, $99, $bc, $8f, $f6, $e9, $00 ; Base for 6000
+        .byte $21, $45, $07, $8d, $82, $99, $9c, $00 ; Base for 6100
+        .byte $d5, $32, $98, $fd, $cc, $37, $af, $00 ; Base for 6200
+        .byte $7c, $1e, $e6, $db, $16, $a0, $8d, $00 ; Base for 6300
 quick_resume_64:
-	.byte $95, $DE, $F5, $48, $A2, $33, $77, $00 ; Base for 6400
-	.byte $92, $AF, $8A, $D5, $C0, $6B, $EB, $00 ; Base for 6500
-	.byte $29, $45, $17, $9D, $B2, $89, $EC, $00 ; Base for 6600
-	.byte $B6, $FB, $96, $61, $4D, $8F, $14, $00 ; Base for 6700
-	.byte $3C, $FA, $83, $76, $70, $9C, $7D, $00 ; Base for 6800
-	.byte $64, $BE, $77, $0B, $E5, $F2, $39, $00 ; Base for 6900
-	.byte $62, $4A, $8E, $1B, $07, $31, $3F, $00 ; Base for 7000
-	.byte $DA, $09, $BD, $AE, $D5, $88, $23, $00 ; Base for 7100
-	.byte $9A, $63, $57, $91, $3E, $1C, $60, $00 ; Base for 7200
-	.byte $31, $53, $31, $97, $F4, $DB, $32, $00 ; Base for 7300
-	.byte $7A, $5A, $AE, $1B, $47, $71, $FF, $00 ; Base for 7400
-	.byte $43, $3D, $BB, $C0, $B7, $36, $58, $00 ; Base for 7500
-	.byte $F2, $B3, $56, $30, $9C, $FD, $C4, $00 ; Base for 7600
-	.byte $13, $45, $63, $E9, $2E, $FC, $A1, $00 ; Base for 7700
-	.byte $F2, $5F, $BB, $04, $72, $7A, $9E, $00 ; Base for 7800
-	.byte $3D, $F9, $82, $71, $75, $97, $7C, $00 ; Base for 7900
-	.byte $EE, $47, $9B, $14, $22, $0A, $4E, $00 ; Base for 8000
-	.byte $E9, $CC, $1F, $87, $B8, $B7, $C6, $00 ; Base for 8100
-	.byte $B2, $97, $F2, $DD, $38, $82, $F3, $00 ; Base for 8200
-	.byte $4E, $4E, $D2, $4F, $EB, $74, $A2, $00 ; Base for 8300
-	.byte $3B, $D7, $A0, $0F, $4F, $51, $CF, $00 ; Base for 8400
-	.byte $81, $84, $87, $8E, $81, $9C, $9F, $00 ; Base for 8500
-	.byte $1A, $10, $24, $04, $4C, $44, $DC, $00 ; Base for 8600
-	.byte $D9, $52, $E0, $45, $85, $0E, $04, $00 ; Base for 8700
-	.byte $68, $CA, $1B, $8F, $B8, $A7, $D6, $00 ; Base for 8800
-	.byte $47, $31, $BF, $DC, $A3, $1A, $5C, $00 ; Base for 8900
-	.byte $D9, $54, $E6, $4F, $83, $1C, $1A, $00 ; Base for 9000
-	.byte $3D, $5F, $25, $9B, $D0, $E7, $46, $00 ; Base for 9100
-	.byte $50, $26, $86, $CB, $C6, $51, $DD, $00 ; Base for 9200
-	.byte $6D, $4F, $95, $0A, $20, $34, $74, $00 ; Base for 9300
-	.byte $C4, $55, $DD, $76, $CC, $21, $B9, $00 ; Base for 9400
-	.byte $06, $B4, $B9, $D0, $A3, $02, $44, $00 ; Base for 9500
+        .byte $b8, $5b, $2b, $9d, $ca, $f1, $64, $00 ; Base for 6400
+        .byte $b1, $16, $74, $58, $b0, $01, $61, $00 ; Base for 6500
+        .byte $7e, $d4, $29, $81, $d2, $d1, $74, $00 ; Base for 6600
+        .byte $56, $ba, $17, $63, $4d, $8b, $10, $00 ; Base for 6700
+        .byte $a9, $2a, $78, $2c, $dc, $85, $3c, $00 ; Base for 6800
+        .byte $71, $43, $a1, $26, $64, $28, $e0, $00 ; Base for 6900
+        .byte $cd, $c4, $5f, $d7, $68, $c6, $17, $00 ; Base for 7000
+        .byte $0c, $4e, $56, $ca, $67, $f3, $3c, $00 ; Base for 7100
+        .byte $ff, $9e, $61, $5d, $9f, $24, $1a, $00 ; Base for 7200
+        .byte $21, $67, $25, $eb, $a0, $77, $37, $00 ; Base for 7300
+        .byte $76, $12, $fe, $db, $26, $90, $dd, $00 ; Base for 7400
+        .byte $07, $e9, $e6, $35, $f9, $92, $61, $00 ; Base for 7500
+        .byte $ee, $9f, $42, $7c, $f8, $01, $f1, $00 ; Base for 7600
+        .byte $29, $45, $17, $9d, $b2, $89, $ec, $00 ; Base for 7700
+        .byte $91, $aa, $89, $dc, $cf, $76, $e8, $00 ; Base for 7800
+        .byte $6e, $02, $de, $db, $66, $d0, $1d, $00 ; Base for 7900
+        .byte $52, $50, $f4, $55, $bd, $16, $6c, $00 ; Base for 8000
+        .byte $c4, $83, $0a, $0c, $18, $00, $30, $00 ; Base for 8100
+        .byte $1c, $86, $bf, $b2, $cd, $a8, $33, $00 ; Base for 8200
+        .byte $9a, $6b, $5f, $89, $36, $24, $48, $00 ; Base for 8300
+        .byte $9a, $63, $57, $91, $3e, $1c, $60, $00 ; Base for 8400
+        .byte $d6, $6b, $c7, $10, $9e, $bf, $82, $00 ; Base for 8500
+        .byte $d8, $77, $c7, $28, $a6, $f7, $ba, $00 ; Base for 8600
+        .byte $dd, $98, $23, $13, $55, $73, $d9, $00 ; Base for 8700
+        .byte $17, $27, $09, $47, $55, $db, $70, $00 ; Base for 8800
+        .byte $3e, $6c, $10, $c8, $e9, $78, $aa, $00 ; Base for 8900
+        .byte $56, $c8, $65, $f5, $3e, $d4, $a9, $00 ; Base for 9000
+        .byte $f2, $5f, $bb, $04, $72, $7a, $9e, $00 ; Base for 9100
+        .byte $66, $6c, $a0, $79, $39, $cb, $b8, $00 ; Base for 9200
+        .byte $bf, $a0, $df, $9e, $21, $1d, $5f, $00 ; Base for 9300
+        .byte $54, $9a, $33, $07, $61, $6f, $ad, $00 ; Base for 9400
+        .byte $08, $2e, $3e, $62, $1e, $da, $e7, $00 ; Base for 9500
 quick_resume_96:
-	.byte $D6, $21, $8D, $CE, $D5, $48, $E2, $00 ; Base for 9600
-	.byte $E1, $C8, $0B, $9B, $8C, $BB, $A2, $00 ; Base for 9700
-	.byte $D5, $EA, $41, $95, $16, $3C, $10, $00 ; Base for 9800
-	.byte $54, $3C, $94, $ED, $C4, $1F, $97, $00 ; Base for 9900
+        .byte $8d, $b4, $af, $c6, $99, $14, $26, $00 ; Base for 9600
+        .byte $e0, $f9, $38, $ca, $bb, $2e, $58, $00 ; Base for 9700
+        .byte $3b, $d7, $a0, $0f, $4f, $51, $cf, $00 ; Base for 9800
+        .byte $42, $26, $a2, $ef, $aa, $75, $21, $00 ; Base for 9900
 
 do_quick_resume:
 	asl ; *= 2
@@ -176,7 +176,7 @@ prac_quick_using_64:
 	stx $01
 	jmp do_quick_resume
 
-SMALL_FIRE_FRAMES = $1b3
+SMALL_FIRE_FRAMES = $10c
 
 AdvanceToRule:
 		;
@@ -186,11 +186,11 @@ AdvanceToRule:
 		ldy #0
 		ldx PowerUps
 		beq NoPowerups
-		lda #$3B
+		lda #$4D
 		iny
 		dex
 		beq BigMarioPowerup
-		lda #$7A
+		lda #$8C
 		iny 
 		dex
 		beq BigMarioPowerup
@@ -219,7 +219,7 @@ NoPowerups:
 		rts
 StartAdvance:
 		lda IntervalTimerControl
-		cmp #3
+		cmp #0
 DeadLock:
 		bne DeadLock
 		;
@@ -267,9 +267,6 @@ RunRandomAdvance:
 		jsr AdvanceRandom
 		jsr AdvanceRandom
 		jsr AdvanceRandom
-		jsr AdvanceRandom
-		jsr AdvanceRandom
-		jsr AdvanceRandom
 		jmp AdvanceFurther
 RuleContinue:
 		lda #0
@@ -278,15 +275,16 @@ RuleContinue:
 		;
 		; Advance to correct place within this rule
 		;
-		lda #18
+		;lda #18
+		lda #0
 		sta $02
-AdvanceWithin:
-		jsr AdvanceRandom
-		dec $02
-		bne AdvanceWithin
-		;
-		; Advance powerup frames
-		;
+;;AdvanceWithin:
+;;		jsr AdvanceRandom
+;;		dec $02
+;;		bne AdvanceWithin
+;;		;
+;;		; Advance powerup frames
+;;		;
 		lda PowerUpFrames
 		cmp #<SMALL_FIRE_FRAMES
 		bne StartFramePrecision
@@ -307,7 +305,7 @@ NoPowerUpFrames:
 		; Set the correct framecounter
 		;
 		ldy #$0e
-		ldx #$a2
+		ldx #$8D
 
 		lda BANK_SELECTED
 		cmp #BANK_ORG
