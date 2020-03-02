@@ -335,12 +335,14 @@ run_records:
 		beq exit_out
 
 		ldx RECORDS_MODE
-		cmp #Left_Dir
-		beq @go_left
-		cmp #Right_Dir
-		beq @go_right
-		cmp #Start_Button
-		beq exit_records
+		;cmp #Left_Dir
+		;beq @go_left
+		;cmp #Right_Dir
+		;beq @go_right
+		;cmp #Start_Button
+		;beq exit_records
+		cmp #0
+		bne exit_records
 		rts
 @go_right:
 		inx
