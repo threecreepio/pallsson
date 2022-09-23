@@ -87,6 +87,7 @@ smb.nes: $(OBJECTS)
 		$(OUT)/scenario_data.o \
 		$(OUT)/lost.o \
 		$(OUT)/leveldata.o \
+		--dbgfile "smb.dbg" \
 		-o $@
 
 .PHONY: clean
