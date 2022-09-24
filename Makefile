@@ -33,6 +33,9 @@ all: smb.nes
 run: smb.nes
 	wine fceux/fceux.exe smb.nes
 
+patch.zip: patch.ips
+	zip patch.zip patch.ips README.md
+
 patch.ips: smb.nes
 	scripts/flips original.nes smb.nes patch.ips
 

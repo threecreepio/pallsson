@@ -2,10 +2,6 @@
 
 This is a small patch to the fantastic Pellsson practice rom (https://github.com/pellsson/smb) allowing PAL version practice rather than NTSC.
 
-Note that this **only** updates the SMB1 version. Lost Levels and Scenarios are left untouched, and will run slow if you attempt to play them on a PAL system.
-
-Probably still has bugs left to iron out.
-
 //threecreepio
 
 ## Download & Installation
