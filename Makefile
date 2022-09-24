@@ -33,6 +33,9 @@ all: smb.nes
 run: smb.nes
 	wine fceux/fceux.exe smb.nes
 
+smb.ips: smb.nes
+	scripts/flips original.nes smb.nes smb.ips
+
 inc/wram.inc: wram/ram_layout.asm $(OUT)/ram_layout.map
 	python scripts/genram.py $(OUT)/ram_layout.map inc/wram.inc
 
