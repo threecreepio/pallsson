@@ -1,6 +1,10 @@
 AS = ca65
 LD = ld65
-AFLAGS = -W0 -U -I inc -g $(EXTRA_AFLAGS)
+AFLAGS = -W0 -U -I inc -g
+ifdef PAL
+AFLAGS += -DPAL
+endif
+
 OUT = build
 OBJECTS = $(OUT)/intro.o \
           $(OUT)/chrloader.o \
@@ -37,7 +41,11 @@ patch.zip: patch.ips
 	zip patch.zip patch.ips README.md
 
 patch.ips: smb.nes
+ifdef PAL
+	scripts/flips original_pal.nes smb.nes patch.ips
+else
 	scripts/flips original.nes smb.nes patch.ips
+endif
 
 inc/wram.inc: wram/ram_layout.asm $(OUT)/ram_layout.map
 	python scripts/genram.py $(OUT)/ram_layout.map inc/wram.inc
