@@ -958,7 +958,50 @@ DoNibble:
 DontUpdateSockHash:
 		rts
 
+;
+; Sockfolder works by taking:
+; (YPosition / MaxYSpeed) * (MaxXSpeed)
+; and adding it to the players current position
+;
+; that way you can see pixel mario would land on.
+; (except it shows the pixel at $FF, which doesn't technically exist)
+;
 ForceUpdateSockHashInner:
+		ldx VRAM_Buffer1_Offset
+		bne DontUpdateSockHash
+.ifdef PAL
+		lda Player_Y_HighPos             ; check if player is vertically on screen
+		beq @nosock                      ; no - skip updating sockfolder
+		lda SprObject_Y_Position         ; get player y position
+		cmp #$B1                         ; are we close to the ground?
+		bcc @yessock                     ; no - we're in a good range to show sockfolder
+		clc                              ; yes - no need to update sockfolder, we're probably dying. :(
+@nosock:
+		rts                              ; skip updating sockfolder
+@yessock:
+		tay
+		cmp #$A0                         ; is the player closer to the ground than A0?
+		bcc :+                           ; no - farther up, skip ahead
+		lda @Lookup-$A0,y                ; yes - load the correct value from the lookup table
+		clc                              ;
+		bcc @Set                         ; and skip ahead to calculate the value
+:		cmp #$50                         ; is the player in the middle range of the screen?
+		bcc :+                           ; no - the player is high up, skip ahead
+		lda @Lookup-$50,y                ; yes - load the midrange value from the lookup table
+		clc                              ;
+		adc #$30                         ; add offset the value based on this "groups" height
+		bcc @Set                         ; and skip ahead to calculate the value
+:		lda @Lookup,y                    ; we are the top of the screen! load the top range value
+		adc #$60                         ; add offset the value based on this "groups" height
+@Set:
+		adc SprObject_X_Position         ; now we can add the players x position
+		sta $2                           ; which is what we'll display in sockfolder
+		lda SprObject_PageLoc            ; then add any carry value onto the page location
+		adc #0                           ;
+		sta $1                           ; and store that to be displayed in sockfolder as well
+		lda SprObject_X_MoveForce        ; and set our moveforce in sockfolder
+		sta $3
+.else
 		lda SprObject_X_MoveForce ; Player force
 		sta $3
 		lda SprObject_X_Position ; Player X
@@ -993,9 +1036,8 @@ something_or_other:
 		lda $1
 		adc #0
 		sta $1
-		ldx VRAM_Buffer1_Offset 
-		bne skip_sock_hash
-draw_sock_hash:
+.endif
+@Draw:
 		lda #$20
 		sta VRAM_Buffer1
 		lda #$62 ;
@@ -1013,8 +1055,17 @@ draw_sock_hash:
 		sta VRAM_Buffer1+3, x
 		lda #$09
 		sta VRAM_Buffer1_Offset
-skip_sock_hash:
 		rts
+.ifdef PAL
+@Lookup:
+; this is a lookup used to calculate (Y/5)*48, which is the number of
+; X pixels the player will travel based on their current height.
+.byte $39,$36,$36,$36,$36,$36,$33,$33,$33,$33,$33,$30,$30,$30,$30,$30
+.byte $2d,$2d,$2d,$2d,$2d,$2a,$2a,$2a,$2a,$2a,$27,$27,$27,$27,$27,$24
+.byte $24,$24,$24,$24,$21,$21,$21,$21,$21,$1e,$1e,$1e,$1e,$1e,$1b,$1b
+.byte $1b,$1b,$1b,$18,$18,$18,$18,$18,$15,$15,$15,$15,$15,$12,$12,$12
+.byte $12,$12,$0f,$0f,$0f,$0f,$0f,$0c,$0c,$0c,$0c,$0c,$09,$09,$09,$09
+.endif
 
 ForceUpdateSockHash:
 		jsr ForceUpdateSockHashInner
