@@ -344,7 +344,11 @@ ContinueCGrabTTick:
         lda Squ2_SfxLenCounter  ;check for time to play second tone yet
         cmp #$30                ;timer tick sound also executes this, not sure why
         bne N2Tone
+.ifdef PAL
         lda #$4e                ;if so, load the tone directly into the reg
+.else
+        lda #$54                ;if so, load the tone directly into the reg
+.endif
         sta SND_SQUARE2_REG+2
 N2Tone: bne DecrementSfx2Length
 
