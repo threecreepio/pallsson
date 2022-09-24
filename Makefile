@@ -1,6 +1,6 @@
 AS = ca65
 LD = ld65
-AFLAGS = -W0 -U -I inc -g -DPAL
+AFLAGS = -W0 -U -I inc -g $(EXTRA_AFLAGS)
 OUT = build
 OBJECTS = $(OUT)/intro.o \
           $(OUT)/chrloader.o \
@@ -33,8 +33,8 @@ all: smb.nes
 run: smb.nes
 	wine fceux/fceux.exe smb.nes
 
-smb.ips: smb.nes
-	scripts/flips original.nes smb.nes smb.ips
+patch.ips: smb.nes
+	scripts/flips original.nes smb.nes patch.ips
 
 inc/wram.inc: wram/ram_layout.asm $(OUT)/ram_layout.map
 	python scripts/genram.py $(OUT)/ram_layout.map inc/wram.inc
